@@ -1,0 +1,10 @@
+## Criando um projeto
+
+--Criar a pasta do projeto
+--dentro da pasta, clica com o botão direito em terminal integrado e executa o comando "npm init -y"
+--cria o arquivo principal index.js
+--criar o script de start no package.json "node index.js"
+--instalar uma biblioteca externa (prompt-sync)
+--dentro do projeto "npm install prompt-sync"
+implementa
+--roda o projeto "npm start"
