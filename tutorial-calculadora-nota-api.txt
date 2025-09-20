@@ -1,0 +1,11 @@
+-npm init -y
+-npm install express cors
+-npm install --save-dev nodemon jest supertest
+-ajustar no package.json o script de start e o de test
+    "nodemon index.js" e "jest"
+-criar o index.js
+-criar uma pasta chamada 'routes'
+
+
+
+acesse o site: https://gustavoclay.github.io/web para testar sua aplicação

@@ -5,8 +5,8 @@ console.log("Olá, seja bem vindo! Este é o exercício 01 - Calculadora-Node! A
 const calculadora = require('./calculadoraNode');
 
 let num1 = 5;
-let num2 = 3;
-let operacao = "**";
+let num2 = 5;
+let operacao = "+";
 
 let resultado;
 
