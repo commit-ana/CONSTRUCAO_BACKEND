@@ -21,7 +21,7 @@ router.get('/pessoas', async (req, res, next) => {
     const pessoas = await PessoaModel.find();
 });
 
-router .get('/pessoas/:id', async (req, res, next) => {
+router .get('/pessoas/:id', validarID, async (req, res, next) => {
  const pessoaEncontrada = await PessoaModel.findById(req.params.id);
     if(!pessoaEncontrada) {
         return res.status(404).json({erro: 'Pessoa não encontrada'});
@@ -30,7 +30,7 @@ router .get('/pessoas/:id', async (req, res, next) => {
 });
 
 //Atualização
-router.put('/pessoas/:id', async (req, res, next) => {
+router.put('/pessoas/:id', validarID, async (req, res, next) => {
     const id = req.params.id
     const novosDados = req.body
     const pessoaAtualizada = await PessoaModel.findByIdAndUpdate(id, novosDados, {new : true}); 
@@ -41,7 +41,7 @@ router.put('/pessoas/:id', async (req, res, next) => {
 });
 
 //Exclusão
-router.delete('/pessoas/:id', async (req, res, next) => {
+router.delete('/pessoas/:id', validarID, async (req, res, next) => {
     const id = req.params.id
     await PessoaModel.findByIdAndDelete(id);
     res.status(204).send();
