@@ -6,6 +6,7 @@ const PessoaModel = require ('../models/PessoaModel');
 
 //Importo os validadores
 const { validarNovaPessoa } = require ('../validators/pessoaValidator');
+const { validarID } = require ('../validators/IDValidator');
 
 //Rotas
 //Cadastro
