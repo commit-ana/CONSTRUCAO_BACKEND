@@ -24,19 +24,10 @@ mongoose.connect(url)
   })
 
 //Rotas
+const LivroController = require ('./controllers/LivroController')
+app.use(LivroController);
 
-
-
-
-
-
-
-
-
-
-
-
-
+//Verificação de servidor rodando
 app.listen(3000, () => {
     console.log('Aplicação rodando em http://localhost:3000');
 });
