@@ -2,27 +2,29 @@ const express = require('express');
 const router = express.Router();
 
 //Importo o modelo
-const LivroModel = require ('../models/LivroModel');
+const LivrosModel = require ('../models/livro');
 
 //Importo os validadores
-const { validarNovoLivro } = require ('..validators/livroValidator');
+const { validarNovoLivro, validarAtualizacaoLivro } = require ('../validators/livroValidator');
 const { validarID } = require ('../validators/IDValidator');
 
 //Rotas
 //Cadastro
 router.post('/livros', validarNovoLivro, async (req, res, next) => {
     const dados = req.body;
-    const livroCadastrado = await LivroModel.create(dados)
+    const livroCadastrado = await LivrosModel.create(dados)
     res.status(201).json(livroCadastrado)
 });
 
 //Leitura
 router.get('/livros', async (req, res, next) => {
-    const livros = await LivroModel.find();
+    const livros = await LivrosModel.find();
+    res.json(livros);
 });
 
+//Leitura por ID
 router .get('/livros/:id', validarID, async (req, res, next) => {
- const livroEncontrado = await LivroModel.findById(req.params.id);
+ const livroEncontrado = await LivrosModel.findById(req.params.id);
     if(!livroEncontrado) {
         return res.status(404).json({erro: 'Livro não encontrado'});
     }
@@ -30,10 +32,10 @@ router .get('/livros/:id', validarID, async (req, res, next) => {
 });
 
 //Atualização
-router.put('/livros/:id', validarID, async (req, res, next) => {
+router.put('/livros/:id', validarID, validarAtualizacaoLivro, async (req, res, next) => {
     const id = req.params.id
     const novosDados = req.body
-    const livroAtualizado = await LivroModel.findByIdAndUpdate(id, novosDados, {new : true}); 
+    const livroAtualizado = await LivrosModel.findByIdAndUpdate(id, novosDados, {new : true}); 
     if(!livroAtualizado) {
         return res.status(404).json({erro: 'Livro não encontrado!'});
     }
@@ -43,8 +45,8 @@ router.put('/livros/:id', validarID, async (req, res, next) => {
 //Exclusão
 router.delete('/livros/:id', validarID, async (req, res, next) => {
     const id = req.params.id
-    await LivroModel.findByIdAndDelete(id);
-    res.status(204).send();
+    await LivrosModel.findByIdAndDelete(id);
+    res.status(204).json({mensagem: 'Livro excluído com sucesso!'});
 })
 
 //IMPORTANDO O MÓDULO
